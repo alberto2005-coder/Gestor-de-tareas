@@ -4,7 +4,6 @@ __pycache__/
 
 # Carpeta de build de PyInstaller
 build/
-dist/
 *.spec
 
 # Archivos de IDE
