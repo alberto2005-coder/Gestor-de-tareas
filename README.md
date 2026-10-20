@@ -194,11 +194,174 @@ OPCIONALES ADICIONALES:
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-📝 DESCRIPCIÓN PARA GITHUB "ABOUT":
+---
 
-Gestor de tareas simple con interfaz gráfica. Python + Tkinter. 
-Crea, edita y elimina tareas. Persistencia en JSON.
+# English Version
 
-(108 caracteres - Perfecto para la meta-description)
+# 📋 Task Manager
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+A simple yet efficient task manager developed with **Python and Tkinter**,
+with an intuitive graphical interface to organize and manage your daily tasks.
+
+## ✨ Features
+
+- **Friendly graphical interface** - Clean, easy-to-use design with Tkinter
+- **Create tasks** - Add new tasks with descriptions
+- **Mark as completed** - Mark tasks as done
+- **Delete tasks** - Remove tasks you no longer need
+- **Data persistence** - Your tasks are saved to a JSON file
+- **Real-time view** - See all your tasks organized in a list
+- **Responsive interface** - Adapts to different window sizes
+
+## 🚀 Requirements
+
+- Python 3.6 or higher
+- Tkinter (included by default with Python)
+- No additional external dependencies
+
+## 📦 Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/alberto2005-coder/Gestor-de-tareas.git
+   cd Gestor-de-tareas
+   ```
+
+2. **Check that Python is installed**
+   ```bash
+   python --version
+   ```
+
+3. **Run the application**
+   ```bash
+   python main.py
+   ```
+
+## 📁 Project Structure
+
+```
+Gestor-de-tareas/
+├── main.py              # Application entry point
+├── gui.py               # Graphical interface (Tkinter)
+├── persistencia.py      # JSON storage management
+├── tareas.json          # Task data file
+├── dist/                # Compiled executable (optional)
+├── README.md            # This file
+└── LICENSE              # MIT License
+```
+
+## 🎯 How to Use
+
+1. **Open the application** by running `python main.py`
+2. **Add a task** by typing in the input field and clicking "Agregar" (Add)
+3. **Mark as completed** by selecting a task and clicking "Completar" (Complete)
+4. **Delete tasks** by selecting a task and clicking "Eliminar" (Delete)
+5. **Tasks are saved automatically** to `tareas.json`
+
+## 🔧 Technologies Used
+
+- **Python 3.6+** - Programming language
+- **Tkinter** - GUI framework
+- **JSON** - Data storage
+
+## 📝 Main Modules
+
+### `main.py`
+- Application entry point
+- Initializes the main window
+- Handles program execution
+
+### `gui.py`
+- Builds the graphical interface with Tkinter
+- Manages user events
+- Visually updates the task list
+
+### `persistencia.py`
+- Reads and writes data to `tareas.json`
+- Loads saved tasks on startup
+- Saves changes automatically
+
+## 💾 Data Format
+
+Tasks are stored in `tareas.json` with the following structure:
+
+```json
+[
+  {
+    "id": 1,
+    "titulo": "Comprar leche",
+    "descripcion": "Ir al supermercado",
+    "completada": false
+  },
+  {
+    "id": 2,
+    "titulo": "Hacer tarea",
+    "descripcion": "Matemáticas capítulo 5",
+    "completada": true
+  }
+]
+```
+
+## 🛠️ Possible Future Improvements
+
+- [ ] Categories for tasks (work, personal, etc.)
+- [ ] Due dates
+- [ ] Priorities (high, medium, low)
+- [ ] Task search and filtering
+- [ ] Dark/light themes
+- [ ] Cloud sync
+- [ ] Local notifications
+- [ ] Export to PDF or Excel
+
+## 🐛 Troubleshooting
+
+### Error: "ModuleNotFoundError: No module named 'tkinter'"
+
+On Ubuntu/Debian:
+```bash
+sudo apt-get install python3-tk
+```
+
+On Fedora:
+```bash
+sudo dnf install python3-tkinter
+```
+
+### Tasks are not saved
+
+Check that you have write permissions in the project folder:
+```bash
+chmod 755 .
+```
+
+### Window does not show
+
+Try running with:
+```bash
+python3 main.py
+```
+
+## 📄 License
+
+This project is under the MIT license. See the `LICENSE` file for details.
+
+## 👤 Author
+
+**alberto2005-coder** - GitHub: [@alberto2005-coder](https://github.com/alberto2005-coder)
+
+## 🤝 Contributing
+
+Contributions are welcome. Please:
+
+1. Fork the project
+2. Create a branch for your feature (`git checkout -b feature/MyFeature`)
+3. Commit your changes (`git commit -m 'Add new feature'`)
+4. Push to the branch (`git push origin feature/MyFeature`)
+5. Open a Pull Request
+
+## ⭐ If it was useful to you, give it a star!
+
+---
+
+**Last updated:** May 2026
+
