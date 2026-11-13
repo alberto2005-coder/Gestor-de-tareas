@@ -1,367 +1,298 @@
+# Gestor de Tareas
 
-# 📋 Gestor de Tareas
+[![Python](https://img.shields.io/badge/Python-3.8%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Tkinter](https://img.shields.io/badge/GUI-Tkinter-FFD43B?logo=python&logoColor=black)](https://docs.python.org/3/library/tkinter.html)
+[![Matplotlib](https://img.shields.io/badge/Gráficas-Matplotlib-11557C)](https://matplotlib.org/)
+[![MIT](https://img.shields.io/badge/Licencia-MIT-green)](LICENSE)
 
-Un gestor de tareas simple pero eficiente desarrollado con **Python y Tkinter**, 
-con una interfaz gráfica intuitiva para organizar y gestionar tus tareas diarias.
+[Español](#español) · [English](#english)
 
-## ✨ Características
+---
 
-- **Interfaz gráfica amigable** - Diseño limpio y fácil de usar con Tkinter
-- **Crear tareas** - Añade nuevas tareas con descripciones
-- **Marcar como completadas** - Marca tareas como realizadas
-- **Eliminar tareas** - Borra tareas que ya no necesitas
-- **Persistencia de datos** - Guarda tus tareas en un archivo JSON
-- **Visualización en tiempo real** - Ve todas tus tareas organizadas en una lista
-- **Interfaz responsiva** - Se adapta a diferentes tamaños de ventana
+## Español
 
-## 🚀 Requisitos
+### Índice
 
-- Python 3.6 o superior
-- Tkinter (incluido por defecto en Python)
-- Ninguna dependencia externa adicional
+- [Descripción](#descripción)
+- [Características](#características)
+- [Captura del flujo](#captura-del-flujo)
+- [Requisitos](#requisitos)
+- [Instalación](#instalación)
+- [Uso](#uso)
+- [Formato de datos](#formato-de-datos)
+- [Estructura del proyecto](#estructura-del-proyecto)
+- [Limitaciones conocidas](#limitaciones-conocidas)
+- [Solución de problemas](#solución-de-problemas)
+- [Licencia](#licencia)
 
-## 📦 Instalación
+### Descripción
 
-1. **Clona el repositorio**
-   ```bash
-   git clone https://github.com/alberto2005-coder/Gestor-de-tareas.git
-   cd Gestor-de-tareas
-   ```
+Aplicación de escritorio para organizar tareas diarias con **Python** y **Tkinter**. Cada tarea guarda nombre, descripción, fecha límite, prioridad, categoría y estado, y se persiste automáticamente en un archivo **JSON**. Incluye una ventana de **estadísticas** con gráficas de estado y prioridad.
 
-2. **Verifica que tengas Python instalado**
-   ```bash
-   python --version
-   ```
+### Características
 
-3. **Ejecuta la aplicación**
-   ```bash
-   python main.py
-   ```
+- **Tabla de tareas** con seis columnas: nombre, descripción, fecha, prioridad, categoría y estado.
+- **Crear tareas** mediante un formulario con validación de campos obligatorios.
+- **Actualizar tareas** seleccionando una fila de la tabla.
+- **Eliminar tareas** con confirmación por mensaje.
+- **Estados**: `pendiente`, `en progreso` y `completada`.
+- **Prioridades**: `alta`, `media` y `baja`.
+- **Validación de fecha** en formato `YYYY-MM-DD`.
+- **Estadísticas** con gráfico circular por estado y gráfico de barras por prioridad.
+- **Persistencia automática** en `tareas.json`; no requiere base de datos.
 
-## 📁 Estructura del Proyecto
+### Captura del flujo
 
+1. **Crear tarea** → rellena los seis campos → **Guardar Tarea**.
+2. La fila aparece al instante en la tabla principal.
+3. Selecciona una fila y usa **Actualizar tarea** o **Eliminar tarea**.
+4. Pulsa **Estadísticas** para ver el reparto por estado y prioridad.
+
+### Requisitos
+
+- **Python 3.8** o superior.
+- **Tkinter** (viene con Python en Windows y macOS; en Linux suele ser un paquete aparte).
+- **Matplotlib** para la ventana de estadísticas.
+
+### Instalación
+
+```bash
+git clone https://github.com/alberto2005-coder/Gestor-de-tareas.git
+cd Gestor-de-tareas
+
+python -m venv .venv
+# Windows
+.venv\Scripts\activate
+# macOS / Linux
+source .venv/bin/activate
+
+pip install matplotlib
+python main.py
 ```
-Gestor-de-tareas/
-├── main.py              # Punto de entrada de la aplicación
-├── gui.py               # Interfaz gráfica (Tkinter)
-├── persistencia.py      # Gestión de almacenamiento en JSON
-├── tareas.json          # Archivo de datos de tareas
-├── dist/                # Ejecutable compilado (opcional)
-├── README.md            # Este archivo
-└── LICENSE              # Licencia MIT
+
+Si tu distribución Linux no trae Tkinter:
+
+```bash
+sudo apt install python3-tk        # Debian / Ubuntu
+sudo dnf install python3-tkinter   # Fedora
 ```
 
-## 🎯 Cómo Usar
+También hay un ejecutable de Windows ya compilado en `dist/main.exe` (sin instalación, pero sin las ventajas de ejecutar el código).
 
-1. **Abre la aplicación** ejecutando `python main.py`
-2. **Añade una tarea** escribiendo en el campo de entrada y haciendo clic en "Agregar"
-3. **Marca como completada** seleccionando una tarea y haciendo clic en "Completar"
-4. **Elimina tareas** seleccionando una tarea y haciendo clic en "Eliminar"
-5. **Las tareas se guardan automáticamente** en `tareas.json`
+### Uso
 
-## 🔧 Tecnologías Utilizadas
+| Botón | Qué hace |
+|---|---|
+| **Crear tarea** | Abre el formulario; todos los campos son obligatorios |
+| **Actualizar tarea** | Edita la tarea seleccionada (avisa si no hay selección) |
+| **Eliminar tarea** | Borra la tarea seleccionada (avisa si no hay selección) |
+| **Estadísticas** | Gráficas de tareas por estado y por prioridad |
 
-- **Python 3.6+** - Lenguaje de programación
-- **Tkinter** - Framework para interfaz gráfica
-- **JSON** - Almacenamiento de datos
+La ventana principal mide 900×600 y la tabla se expande con ella. Las tareas se cargan al arrancar y se guardan tras cada alta, edición o borrado.
 
-## 📝 Módulos Principales
+### Formato de datos
 
-### `main.py`
-- Punto de entrada de la aplicación
-- Inicializa la ventana principal
-- Maneja la ejecución del programa
-
-### `gui.py`
-- Construye la interfaz gráfica con Tkinter
-- Gestiona los eventos de usuario
-- Actualiza visualmente la lista de tareas
-
-### `persistencia.py`
-- Lee y escribe datos en `tareas.json`
-- Carga las tareas guardadas al iniciar
-- Guarda cambios automáticamente
-
-## 💾 Formato de Datos
-
-Las tareas se guardan en `tareas.json` con la siguiente estructura:
+`tareas.json` contiene una lista de objetos:
 
 ```json
 [
   {
-    "id": 1,
-    "titulo": "Comprar leche",
+    "nombre": "Comprar leche",
     "descripcion": "Ir al supermercado",
-    "completada": false
+    "fecha_limite": "2026-05-20",
+    "prioridad": "media",
+    "categoria": "Personal",
+    "estado": "pendiente"
   },
   {
-    "id": 2,
-    "titulo": "Hacer tarea",
-    "descripcion": "Matemáticas capítulo 5",
-    "completada": true
+    "nombre": "Entregar práctica",
+    "descripcion": "Capítulo 5 de matemáticas",
+    "fecha_limite": "2026-05-22",
+    "prioridad": "alta",
+    "categoria": "Estudios",
+    "estado": "en progreso"
   }
 ]
 ```
 
-## 🛠️ Posibles Mejoras Futuras
+Si el archivo no existe, la aplicación lo crea vacío al iniciar. El archivo se guarda con `UTF-8` y `ensure_ascii=False`, así que los acentos se conservan legibles.
 
-- [ ] Categorías para tareas (trabajo, personal, etc.)
-- [ ] Fechas de vencimiento
-- [ ] Prioridades (alta, media, baja)
-- [ ] Búsqueda y filtrado de tareas
-- [ ] Temas oscuro/claro
-- [ ] Sincronización en la nube
-- [ ] Notificaciones locales
-- [ ] Exportar a PDF o Excel
+### Estructura del proyecto
 
-## 🐛 Solución de Problemas
-
-### Error: "ModuleNotFoundError: No module named 'tkinter'"
-
-En Ubuntu/Debian:
-```bash
-sudo apt-get install python3-tk
-```
-
-En Fedora:
-```bash
-sudo dnf install python3-tkinter
-```
-
-### Las tareas no se guardan
-
-Verifica que tienes permisos de escritura en la carpeta del proyecto:
-```bash
-chmod 755 .
-```
-
-### Ventana no se muestra
-
-Intenta ejecutar con:
-```bash
-python3 main.py
-```
-
-## 📄 Licencia
-
-Este proyecto está bajo la licencia MIT. Ver el archivo `LICENSE` para más detalles.
-
-## 👤 Autor
-
-**alberto2005-coder** - GitHub: [@alberto2005-coder](https://github.com/alberto2005-coder)
-
-## 🤝 Contribuciones
-
-Las contribuciones son bienvenidas. Por favor:
-
-1. Haz un Fork del proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/MiCaracteristica`)
-3. Commit tus cambios (`git commit -m 'Añadir nueva característica'`)
-4. Push a la rama (`git push origin feature/MiCaracteristica`)
-5. Abre un Pull Request
-
-## ⭐ Si te fue útil, ¡dale una estrella!
-
----
-
-**Última actualización:** Mayo 2026
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-✅ TOPICS/TAGS RECOMENDADOS:
-
-TOP 8 (LOS QUE DEBES PONER):
-
-1. python
-2. task-manager
-3. tkinter
-4. gui
-5. json
-6. desktop-application
-7. task-tracking
-8. beginner-friendly
-
-OPCIONALES ADICIONALES:
-
-• project-management
-• todo-app
-• python3
-• persistence
-• windows
-• linux
-• macos
-• learning
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
----
-
-# English Version
-
-# 📋 Task Manager
-
-A simple yet efficient task manager developed with **Python and Tkinter**,
-with an intuitive graphical interface to organize and manage your daily tasks.
-
-## ✨ Features
-
-- **Friendly graphical interface** - Clean, easy-to-use design with Tkinter
-- **Create tasks** - Add new tasks with descriptions
-- **Mark as completed** - Mark tasks as done
-- **Delete tasks** - Remove tasks you no longer need
-- **Data persistence** - Your tasks are saved to a JSON file
-- **Real-time view** - See all your tasks organized in a list
-- **Responsive interface** - Adapts to different window sizes
-
-## 🚀 Requirements
-
-- Python 3.6 or higher
-- Tkinter (included by default with Python)
-- No additional external dependencies
-
-## 📦 Installation
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/alberto2005-coder/Gestor-de-tareas.git
-   cd Gestor-de-tareas
-   ```
-
-2. **Check that Python is installed**
-   ```bash
-   python --version
-   ```
-
-3. **Run the application**
-   ```bash
-   python main.py
-   ```
-
-## 📁 Project Structure
-
-```
+```text
 Gestor-de-tareas/
-├── main.py              # Application entry point
-├── gui.py               # Graphical interface (Tkinter)
-├── persistencia.py      # JSON storage management
-├── tareas.json          # Task data file
-├── dist/                # Compiled executable (optional)
-├── README.md            # This file
-└── LICENSE              # MIT License
+├── main.py           # Punto de entrada: ventana principal y bucle de Tkinter
+├── gui.py            # Interfaz: tabla, formularios y estadísticas
+├── persistencia.py   # Lectura y escritura de tareas.json
+├── tareas.json       # Datos de ejemplo / almacenamiento local
+├── dist/             # Ejecutable de Windows y su propio tareas.json
+├── LICENSE
+└── README.md
 ```
 
-## 🎯 How to Use
+### Limitaciones conocidas
 
-1. **Open the application** by running `python main.py`
-2. **Add a task** by typing in the input field and clicking "Agregar" (Add)
-3. **Mark as completed** by selecting a task and clicking "Completar" (Complete)
-4. **Delete tasks** by selecting a task and clicking "Eliminar" (Delete)
-5. **Tasks are saved automatically** to `tareas.json`
+- **Tkinter no es hilo-seguro**: la interfaz se actualiza solo desde el hilo principal; no hay operaciones en segundo plano.
+- **Edición y borrado por coincidencia de campos**: la fila seleccionada se identifica por `nombre` + `descripcion`. Si tienes dos tareas idénticas en ambos campos, se modificará o borrará la primera que aparezca.
+- **Sin identificador único**: al no haber `id`, las tareas no se pueden enlazar de forma estable (útil si planeas añadir recordatorios o sincronización).
+- **Matplotlib es obligatorio**: aunque solo se usa en `Estadísticas`, el import está en la cabecera de `gui.py`; sin él la aplicación no arranca.
+- **Los datos viven junto al script**: ejecutar desde otra carpeta crea un `tareas.json` distinto. `dist/main.exe` usa su propio archivo dentro de `dist/`.
 
-## 🔧 Technologies Used
+### Solución de problemas
 
-- **Python 3.6+** - Programming language
-- **Tkinter** - GUI framework
-- **JSON** - Data storage
+| Síntoma | Causa probable | Solución |
+|---|---|---|
+| `ModuleNotFoundError: No module named 'tkinter'` | Tkinter no instalado | Instala `python3-tk` / `python3-tkinter` |
+| `ModuleNotFoundError: No module named 'matplotlib'` | Falta la dependencia | `pip install matplotlib` |
+| Las tareas no se guardan | Permisos de escritura en la carpeta | Ejecuta desde una carpeta con permisos o revisa `tareas.json` |
+| La ventana no aparece | Entorno sin pantalla (SSH, WSL sin servidor gráfico) | Usa un escritorio o el `.exe` de `dist/` |
+| Error de fecha | Formato incorrecto | Usa exactamente `YYYY-MM-DD` |
 
-## 📝 Main Modules
+### Licencia
 
-### `main.py`
-- Application entry point
-- Initializes the main window
-- Handles program execution
+**MIT** — consulta [LICENSE](LICENSE).
 
-### `gui.py`
-- Builds the graphical interface with Tkinter
-- Manages user events
-- Visually updates the task list
+---
 
-### `persistencia.py`
-- Reads and writes data to `tareas.json`
-- Loads saved tasks on startup
-- Saves changes automatically
+## English
 
-## 💾 Data Format
+### Table of contents
 
-Tasks are stored in `tareas.json` with the following structure:
+- [Overview](#overview)
+- [Features](#features)
+- [Typical flow](#typical-flow)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Data format](#data-format)
+- [Project structure](#project-structure)
+- [Known limitations](#known-limitations)
+- [Troubleshooting](#troubleshooting)
+- [License](#license)
+
+### Overview
+
+A desktop app for organising daily tasks with **Python** and **Tkinter**. Each task stores a name, description, due date, priority, category and status, and is persisted automatically to a **JSON** file. It ships a **statistics** window with status and priority charts.
+
+### Features
+
+- **Task table** with six columns: name, description, date, priority, category and status.
+- **Create tasks** through a form with required-field validation.
+- **Update tasks** by selecting a row in the table.
+- **Delete tasks** with a message-box confirmation.
+- **Statuses**: `pendiente` (pending), `en progreso` (in progress) and `completada` (done).
+- **Priorities**: `alta`, `media`, `baja` (high, medium, low).
+- **Date validation** in `YYYY-MM-DD` format.
+- **Statistics** with a pie chart by status and a bar chart by priority.
+- **Automatic persistence** to `tareas.json`; no database needed.
+
+### Typical flow
+
+1. **Create task** → fill in all six fields → **Save task**.
+2. The row appears immediately in the main table.
+3. Select a row and use **Update task** or **Delete task**.
+4. Click **Statistics** to see the breakdown by status and priority.
+
+### Requirements
+
+- **Python 3.8** or later.
+- **Tkinter** (bundled with Python on Windows and macOS; usually a separate package on Linux).
+- **Matplotlib** for the statistics window.
+
+### Installation
+
+```bash
+git clone https://github.com/alberto2005-coder/Gestor-de-tareas.git
+cd Gestor-de-tareas
+
+python -m venv .venv
+# Windows
+.venv\Scripts\activate
+# macOS / Linux
+source .venv/bin/activate
+
+pip install matplotlib
+python main.py
+```
+
+If your Linux distribution lacks Tkinter:
+
+```bash
+sudo apt install python3-tk        # Debian / Ubuntu
+sudo dnf install python3-tkinter   # Fedora
+```
+
+A prebuilt Windows executable is also available at `dist/main.exe` (no setup, but without the benefits of running the source).
+
+### Usage
+
+| Button | What it does |
+|---|---|
+| **Create task** | Opens the form; every field is required |
+| **Update task** | Edits the selected task (warns when nothing is selected) |
+| **Delete task** | Removes the selected task (warns when nothing is selected) |
+| **Statistics** | Charts of tasks by status and by priority |
+
+The main window is 900×600 and the table grows with it. Tasks are loaded on start-up and saved after every create, edit or delete.
+
+### Data format
+
+`tareas.json` holds a list of objects:
 
 ```json
 [
   {
-    "id": 1,
-    "titulo": "Comprar leche",
-    "descripcion": "Ir al supermercado",
-    "completada": false
+    "nombre": "Buy milk",
+    "descripcion": "Go to the supermarket",
+    "fecha_limite": "2026-05-20",
+    "prioridad": "media",
+    "categoria": "Personal",
+    "estado": "pendiente"
   },
   {
-    "id": 2,
-    "titulo": "Hacer tarea",
-    "descripcion": "Matemáticas capítulo 5",
-    "completada": true
+    "nombre": "Submit assignment",
+    "descripcion": "Maths chapter 5",
+    "fecha_limite": "2026-05-22",
+    "prioridad": "alta",
+    "categoria": "Studies",
+    "estado": "en progreso"
   }
 ]
 ```
 
-## 🛠️ Possible Future Improvements
+If the file is missing, the app creates an empty one on start-up. It is written with `UTF-8` and `ensure_ascii=False`, so accents stay readable.
 
-- [ ] Categories for tasks (work, personal, etc.)
-- [ ] Due dates
-- [ ] Priorities (high, medium, low)
-- [ ] Task search and filtering
-- [ ] Dark/light themes
-- [ ] Cloud sync
-- [ ] Local notifications
-- [ ] Export to PDF or Excel
+### Project structure
 
-## 🐛 Troubleshooting
-
-### Error: "ModuleNotFoundError: No module named 'tkinter'"
-
-On Ubuntu/Debian:
-```bash
-sudo apt-get install python3-tk
+```text
+Gestor-de-tareas/
+├── main.py           # Entry point: main window and Tkinter loop
+├── gui.py            # UI: table, forms and statistics
+├── persistencia.py   # Reading and writing tareas.json
+├── tareas.json       # Sample data / local storage
+├── dist/             # Windows executable and its own tareas.json
+├── LICENSE
+└── README.md
 ```
 
-On Fedora:
-```bash
-sudo dnf install python3-tkinter
-```
+### Known limitations
 
-### Tasks are not saved
+- **Tkinter is not thread-safe**: the UI is only updated from the main thread; there are no background operations.
+- **Edit and delete match on field values**: the selected row is identified by `nombre` + `descripcion`. If two tasks share both, the first match is edited or deleted.
+- **No unique identifier**: without an `id`, tasks cannot be linked stably (relevant if you plan reminders or sync).
+- **Matplotlib is mandatory**: although it is only used in **Statistics**, the import sits at the top of `gui.py`; without it the app will not start.
+- **Data lives next to the script**: running from another folder creates a different `tareas.json`. `dist/main.exe` uses its own file inside `dist/`.
 
-Check that you have write permissions in the project folder:
-```bash
-chmod 755 .
-```
+### Troubleshooting
 
-### Window does not show
+| Symptom | Likely cause | Fix |
+|---|---|---|
+| `ModuleNotFoundError: No module named 'tkinter'` | Tkinter not installed | Install `python3-tk` / `python3-tkinter` |
+| `ModuleNotFoundError: No module named 'matplotlib'` | Missing dependency | `pip install matplotlib` |
+| Tasks are not saved | No write permission in the folder | Run from a writable folder or check `tareas.json` |
+| Window does not appear | Headless environment (SSH, WSL without a display server) | Use a desktop session or the `dist/` executable |
+| Date error | Wrong format | Use exactly `YYYY-MM-DD` |
 
-Try running with:
-```bash
-python3 main.py
-```
+### License
 
-## 📄 License
-
-This project is under the MIT license. See the `LICENSE` file for details.
-
-## 👤 Author
-
-**alberto2005-coder** - GitHub: [@alberto2005-coder](https://github.com/alberto2005-coder)
-
-## 🤝 Contributing
-
-Contributions are welcome. Please:
-
-1. Fork the project
-2. Create a branch for your feature (`git checkout -b feature/MyFeature`)
-3. Commit your changes (`git commit -m 'Add new feature'`)
-4. Push to the branch (`git push origin feature/MyFeature`)
-5. Open a Pull Request
-
-## ⭐ If it was useful to you, give it a star!
-
----
-
-**Last updated:** May 2026
-
+**MIT** — see [LICENSE](LICENSE).
